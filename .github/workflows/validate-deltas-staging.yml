@@ -41,10 +41,10 @@ jobs:
           echo "${{ secrets.JWTKEY }}" > server.key
           sfdx force:auth:jwt:grant --jwtkeyfile server.key --clientid "${SALESFORCE_CONSUMER_KEY}" --username "${SALESFORCE_ORG_USERNAME}" --instanceurl "${SALESFORCE_ORG_URL}"
 
-      - name: Merge Feature Branch into Target Branch
+      - name: Merge develop branch into main Branch
         run: |
           git fetch origin
-          git merge --no-ff origin/${GITHUB_REF#refs/heads/} -m "Merge ${GITHUB_REF#refs/heads/} into ${TARGET_BRANCH}" --allow-unrelated-histories
+          git merge --no-ff origin/develop -m "Merge ${GITHUB_REF#refs/heads/} into ${TARGET_BRANCH}" --allow-unrelated-histories
           
       - name: Generate Deploy Package
         run: |
