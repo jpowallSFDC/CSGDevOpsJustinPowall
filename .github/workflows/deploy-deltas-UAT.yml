@@ -13,9 +13,9 @@ on:
   
 env:
   SFDX_AUDIENCE_URL: https://test.salesforce.com # Use https://login.salesforce.com for production instances. Use https://test.salesforce.com for sandboxes
-  SALESFORCE_ORG_USERNAME: jpowall@salesforce.com.jpuat # Salesforce username of target org
+  SALESFORCE_ORG_USERNAME: jpowall@salesforce.com.csgdevops.jpuat # Salesforce username of target org
   SALESFORCE_ORG_URL: https://csg-devops-bootcamp--jpuat.sandbox.my.salesforce.com # Salesforce URL of target org
-  SALESFORCE_CONSUMER_KEY: ${{ secrets.SALESFORCE_CONSUMER_KEY }} # SFDX App consumer key from target org
+  SALESFORCE_CONSUMER_KEY: ${{ secrets.SALESFORCE_CONSUMER_KEY_UAT }} # SFDX App consumer key from target org
   TARGET_BRANCH: develop # Git branch to merge feature branch into
   SOURCE_DIR: force-app # Directory you want acu-pack to create a delta package from
   HOME: /root # Needed to run SFDX plugin commands
