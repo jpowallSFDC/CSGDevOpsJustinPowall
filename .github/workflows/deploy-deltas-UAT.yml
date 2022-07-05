@@ -54,9 +54,9 @@ jobs:
           git --no-pager diff HEAD^ --name-status --no-renames > git_diff.txt
           sfdx acumen:source:delta:git -g git_diff.txt -s "${SOURCE_DIR}" -d deploy
           
-      - name: Validate Delta Package to Target Org
+      - name: Deploy Delta Package to Target Org
         run: |
-            sfdx force:source:deploy -u $SALESFORCE_ORG_USERNAME -p deploy -l RunSpecifiedTests -r $(<apex-specified-tests/tests.txt) -g --coverageformatters text --verbose --checkonly
+          sfdx force:source:deploy -p deploy -u "${SALESFORCE_ORG_USERNAME}"
 
       - name: Push Changes to Repository
         if: ${{ success() }}
