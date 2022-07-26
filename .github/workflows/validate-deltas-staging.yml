@@ -40,7 +40,6 @@ jobs:
         run: |
           echo "${{ secrets.JWTKEY }}" > server.key
           sfdx force:auth:jwt:grant --jwtkeyfile server.key --clientid "${SALESFORCE_CONSUMER_KEY}" --username "${SALESFORCE_ORG_USERNAME}" --instanceurl "${SALESFORCE_ORG_URL}"
-
       - name: Merge develop branch into main Branch
         run: |
           git fetch origin
@@ -49,12 +48,11 @@ jobs:
       - name: Generate Deploy Package
         run: |
           git --no-pager diff HEAD^ --name-status --no-renames > git_diff.txt
-          sfdx acumen:source:delta:git -g git_diff.txt -s "${SOURCE_DIR}" -d deploy
+          sfdx acu-pack:source:delta:git -g git_diff.txt -s "${SOURCE_DIR}" -d deploy
           
       - name: Validate Delta Package to Target Org
         run: |
             sfdx force:source:deploy -u $SALESFORCE_ORG_USERNAME -p deploy -l RunSpecifiedTests -r HelloWorldTestClass -g --coverageformatters text --verbose --checkonly
-
       - name: Push Changes to Repository
         if: ${{ success() }}
         run: |
